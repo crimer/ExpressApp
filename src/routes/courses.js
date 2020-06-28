@@ -18,6 +18,15 @@ coursesRoutes.get('/courses', async (req, res, next) => {
 		courses,
 	})
 })
+coursesRoutes.get('/course/:id', async (req, res) => {
+	const course = await Course.getById(req.params.id)
+	res.render('course', {
+		layout: 'empty',
+		title: `Курс ${course.title}`,
+		course,
+	})
+})
+
 coursesRoutes.get('/add', (req, res, next) => {
 	res.render('addCourse', {
 		title: 'Добавить курс',
@@ -29,18 +38,3 @@ coursesRoutes.post('/add', async (req, res) => {
 	await course.save()
 	res.redirect('/courses')
 })
-// usersRoutes.get('/users/:userId', (req, res) => {
-// 	return res.send(`GET HTTP method on user ${req.params.userId} resource`)
-// })
-
-// usersRoutes.post('/users', (req, res) => {
-// 	return res.send('POST HTTP method on user resource')
-// })
-
-// usersRoutes.put('/users', (req, res) => {
-// 	return res.send('PUT HTTP method on user resource')
-// })
-
-// usersRoutes.delete('/users', (req, res) => {
-// 	return res.send('DELETE HTTP method on user resource')
-// })

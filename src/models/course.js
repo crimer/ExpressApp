@@ -18,17 +18,17 @@ export class Course {
 		}
 	}
 	async save() {
-    // Получаем все курсы с json файла
-    const courses = await Course.getAll()
-    console.log(courses);
-    
-    // Добавляем новый курс ко всем имеющимся
-    courses.push(this.toJson())
-    // Сохраняем в json
+		// Получаем все курсы с json файла
+		const courses = await Course.getAll()
+		console.log(courses)
+
+		// Добавляем новый курс ко всем имеющимся
+		courses.push(this.toJson())
+		// Сохраняем в json
 		return new Promise((resolve, reject) => {
 			fs.writeFile(
 				path.join(__dirname, '..', 'data', 'courses.json'),
-				JSON.stringify(courses,null,2),
+				JSON.stringify(courses, null, 2),
 				err => {
 					if (err) {
 						reject(err)
@@ -38,6 +38,10 @@ export class Course {
 				},
 			)
 		})
+	}
+	static async getById(id) {
+		const allCourses = await Course.getAll()
+		return allCourses.find(c => c.id === id)
 	}
 	static getAll() {
 		return new Promise((resolve, reject) => {
