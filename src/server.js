@@ -2,10 +2,21 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import 'dotenv/config'
-import { usersRoutes } from './api/routes/users.js'
+import { usersRoutes } from './routes/users.js'
+import exphbs from 'express-handlebars'
 
 // Сервер
 export const app = express()
+
+// handlebars настройки
+const hbs = exphbs.create({
+	defaultLayout: 'main',
+	extname: 'hbs',
+})
+
+// handlebars как движок отображения express
+app.engine('handlebars', hbs.engine)
+app.set('view engine', 'handlebars')
 
 // Мидлвары
 // Парсим application/x-www-form-urlencoded
