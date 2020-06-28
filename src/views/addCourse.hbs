@@ -1,1 +1,25 @@
-<h1>Add new Course</h1>
+<h1>Добавить новый курс</h1>
+<form action="/add" method="POST">
+  <div class="row">
+    <div class="input-field col s12">
+      <input name="name" id="title" type="text" class="validate" required min="3">
+      <label for="title">Название курса</label>
+      <span class="helper-text" data-error="Введите название"></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input name="price" id="price" type="text" class="validate" required min="3">
+      <label for="price">Цена курса</label>
+      <span class="helper-text" data-error="Введите цену"></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input name="url" id="image" type="text" class="validate" required>
+      <label for="image">Url картинка</label>
+      <span class="helper-text" data-error="Введите url картинки"></span>
+    </div>
+  </div>
+  <button class="waves-effect waves-light btn">Добавить курс</button>
+</form>
