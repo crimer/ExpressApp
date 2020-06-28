@@ -1,9 +1,26 @@
 import express from 'express'
-export const usersRoutes = express.Router()
+export const coursesRoutes = express.Router()
 
 // Роуты
-usersRoutes.get('/', (req, res, next) => {  
-  res.render('about')
+coursesRoutes.get('/', (req, res, next) => {  
+  res.render('index',{
+    title: 'Главная',
+    isHome: true
+  })
+	// return res.status(200).json({ message: 'hi from express' })
+})
+coursesRoutes.get('/courses', (req, res, next) => {  
+  res.render('courses',{
+    title: 'Все курсы',
+    isAll: true
+  })
+	// return res.status(200).json({ message: 'hi from express' })
+})
+coursesRoutes.get('/add', (req, res, next) => {  
+  res.render('addCourse',{
+    title: 'Добавить курс',
+    isAdd: true
+  })
 	// return res.status(200).json({ message: 'hi from express' })
 })
 

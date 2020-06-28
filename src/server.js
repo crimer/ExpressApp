@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import 'dotenv/config'
-import { usersRoutes } from './routes/users.js'
+import { coursesRoutes } from './routes/courses.js'
 import exphbs from 'express-handlebars'
 import path from 'path'
 
@@ -22,6 +22,8 @@ app.set('view engine', 'hbs')
 // Указываем папку где лежат страницы
 app.set('views', path.join(__dirname, 'views'))
 
+// Папка статики (общедоступная)
+app.use(express.static(path.join(__dirname, '../public/')))
 
 // Мидлвары
 // Парсим application/x-www-form-urlencoded
@@ -30,8 +32,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // Лигорование запросов
 app.use(morgan(':status :method :url'))
-// Роуты для пользоватлелей под общим url /users
-app.use('/users', usersRoutes)
+// Роуты для пользоватлелей под общим url /
+app.use('/', coursesRoutes)
 
 // Отлов роута 404 и ошибок
 app.use((req, res, next) => {
