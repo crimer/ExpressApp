@@ -3,8 +3,8 @@ export const usersRoutes = express.Router()
 
 // Роуты
 usersRoutes.get('/', (req, res, next) => {  
-  express.render('about')
-	return res.status(200).json({ message: 'hi from express' })
+  res.render('about')
+	// return res.status(200).json({ message: 'hi from express' })
 })
 
 // usersRoutes.get('/users/:userId', (req, res) => {
