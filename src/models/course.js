@@ -12,18 +12,35 @@ export class Course {
 	toJson() {
 		return {
 			id: this.id,
-			title: this.title,
+			name: this.title,
 			price: this.price,
-			image: this.image,
+			url: this.image,
 		}
 	}
 	async save() {
 		// Получаем все курсы с json файла
 		const courses = await Course.getAll()
-		console.log(courses)
-
 		// Добавляем новый курс ко всем имеющимся
 		courses.push(this.toJson())
+		// Сохраняем в json
+		return new Promise((resolve, reject) => {
+			fs.writeFile(
+				path.join(__dirname, '..', 'data', 'courses.json'),
+				JSON.stringify(courses, null, 2),
+				err => {
+					if (err) {
+						reject(err)
+					} else {
+						resolve()
+					}
+				},
+			)
+		})
+	}
+	static async update(course) {
+		const courses = await Course.getAll()
+		const index = courses.findIndex(c => c.id === course.id)
+		courses[index] = course
 		// Сохраняем в json
 		return new Promise((resolve, reject) => {
 			fs.writeFile(

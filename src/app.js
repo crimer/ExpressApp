@@ -6,5 +6,5 @@ const server = http.createServer(app)
 
 // Слушаем порт
 server.listen(process.env.PORT, () => {
-	console.log(`Server start on port ${process.env.PORT} (¬‿¬)`)
+	console.log(`Server start on port http://localhost:3001/ (¬‿¬)`)
 })
