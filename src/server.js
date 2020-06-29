@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import 'dotenv/config'
 import { coursesRoutes } from './routes/courses.js'
+import { basketRoutes } from './routes/basket.js'
 import exphbs from 'express-handlebars'
 import path from 'path'
 
@@ -34,6 +35,7 @@ app.use(bodyParser.json())
 app.use(morgan(':status :method :url'))
 // Роуты для пользоватлелей под общим url /
 app.use('/', coursesRoutes)
+app.use('/basket', basketRoutes)
 
 // Отлов роута 404 и ошибок
 app.use((req, res, next) => {
