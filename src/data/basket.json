@@ -1,19 +1,4 @@
 {
-	"courses": [
-		{
-			"name": "Курс React Js 1.0",
-			"price": "9000",
-			"url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png",
-			"id": "3d57de31-375b-475a-902b-b697274381c2",
-			"count": 2
-		},
-		{
-			"name": "Курс VueJs 2.0",
-			"price": "11000",
-			"url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png",
-			"id": "1fdc184a-e6a6-4c63-96ad-a0f0bd2d09e8",
-			"count": 1
-		}
-	],
-	"price": 29000
+  "courses": [],
+  "price": 0
 }

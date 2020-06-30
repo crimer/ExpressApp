@@ -12,7 +12,6 @@ basketRoutes.post('/add', async (req, res) => {
 
 basketRoutes.get('/', async (req, res) => {
   const basket = await Basket.fetch()
-  console.log(basket);
   
 	res.render('basket', {
 		title: 'Корзина',
@@ -20,4 +19,9 @@ basketRoutes.get('/', async (req, res) => {
 		courses: basket.courses,
 		price: basket.price,
 	})
+})
+
+basketRoutes.delete('/remove/:id', async (req,res) =>{
+  const basket = await Basket.remove(req.params.id)
+  res.status(200).json(basket)
 })

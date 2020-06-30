@@ -1,10 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 
-const p = path.join(path.dirname(process.mainModule.filename), 'data', 'basket.json')
+const p = path.join(
+	path.dirname(process.mainModule.filename),
+	'data',
+	'basket.json',
+)
 
 export class Basket {
-
 	static async add(course) {
 		// получаем всю корзину
 		const allBasket = await Basket.fetch()
@@ -24,12 +27,37 @@ export class Basket {
 			allBasket.courses.push(course)
 		}
 		// увеличиваем общую цену карзины
-    allBasket.price += +course.price
-    
+		allBasket.price += +course.price
+		// сохраняем
 		return new Promise((resolve, reject) => {
-			fs.writeFile(p, JSON.stringify(allBasket,null,2), err => {
+			fs.writeFile(p, JSON.stringify(allBasket, null, 2), err => {
 				if (err) reject(err)
 				else resolve()
+			})
+		})
+	}
+
+	static async remove(id) {
+		// получаем всю корзину
+		const allBasket = await Basket.fetch()
+		// index того курса который уже есть в карзине
+		const index = allBasket.courses.findIndex(c => c.id === id)
+		// берем курс из карзину по index
+		const course = allBasket.courses[index]
+		if (course.count <= 1) {
+			// удаляем
+      allBasket.courses.splice(index, 1)
+		} else {
+			// уменьшить на 1
+			allBasket.courses[index].count--
+		}
+		// перерасчет цены
+    allBasket.price -= course.price
+		// сохраняем
+		return new Promise((resolve, reject) => {
+			fs.writeFile(p, JSON.stringify(allBasket, null, 2), err => {
+				if (err) reject(err)
+				else resolve(allBasket)
 			})
 		})
 	}
