@@ -19,7 +19,6 @@ if ($basket) {
 			})
 				.then(res => res.json())
 				.then(basket => {
-          console.log('basket',basket);
           
 					if(basket.courses.length){
             const html = basket.courses.map(c => {
