@@ -16,11 +16,11 @@
     <tbody id="basketBody">
       {{#each courses}}
       <tr>
-        <td>{{name}}</td>
+        <td>{{title}}</td>
         <td>{{price}}</td>
         <td>{{count}}</td>
         <td>
-          <button class="btn btn-small" id="deleteBtn" data-id="{{id}}">Удалить</button>
+          <button class="btn btn-small" id="deleteBtn" data-id="{{_id}}">Удалить</button>
         </td>
       </tr>
       {{/each}}

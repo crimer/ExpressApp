@@ -8,6 +8,7 @@ import exphbs from 'express-handlebars'
 import Handlebars from 'handlebars'
 import path from 'path'
 import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
+import { User } from './models/user.js'
 
 // Сервер
 export const app = express()
@@ -26,10 +27,18 @@ app.set('view engine', 'hbs')
 // Указываем папку где лежат страницы
 app.set('views', path.join(__dirname, 'views'))
 
+// Мидлвары
+app.use(async (req, res, next) => {
+	try {
+		const user = await User.findById('5efd7628515e936bb89ea8b1')
+    req.user = user
+    next()
+	} catch (error) {
+		console.log(error)
+	}
+})
 // Папка статики (общедоступная)
 app.use(express.static(path.join(__dirname, '../public/')))
-
-// Мидлвары
 // Парсим application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // Парсим application/json

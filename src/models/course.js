@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { model, Schema } from 'mongoose'
 
 const course = new Schema({
 	title: {
@@ -10,6 +10,10 @@ const course = new Schema({
 		required: true,
 	},
 	image: String,
+	userId: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+	},
 })
 
 export const Course = model('Course', course)

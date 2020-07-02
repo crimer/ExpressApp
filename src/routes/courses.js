@@ -54,12 +54,14 @@ coursesRoutes.get('/add', async (req, res, next) => {
 		isAdd: true,
 	})
 })
+
 // POST /add
 coursesRoutes.post('/add', async (req, res) => {
 	const course = new Course({
 		title: req.body.name,
 		price: req.body.price,
 		image: req.body.url,
+		userId: req.user._id,
 	})
 	try {
 		await course.save()
@@ -71,8 +73,8 @@ coursesRoutes.post('/add', async (req, res) => {
 // POST /course/remove
 coursesRoutes.post('/course/remove', async (req, res) => {
 	try {
-    await Course.deleteOne({ _id: req.body.id, })
-    res.redirect('/courses')
+		await Course.deleteOne({ _id: req.body.id })
+		res.redirect('/courses')
 	} catch (error) {
 		console.log('Delete course error: ', error)
 	}

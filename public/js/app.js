@@ -1,5 +1,5 @@
 const toCurrency = price => {
-  return new Intl.NumberFormat('ru-RU', {
+	return new Intl.NumberFormat('ru-RU', {
 		currency: 'rub',
 		style: 'currency',
 	}).format(price)
@@ -19,24 +19,30 @@ if ($basket) {
 			})
 				.then(res => res.json())
 				.then(basket => {
-          
-					if(basket.courses.length){
-            const html = basket.courses.map(c => {
-              return `
+					if (basket.courses.length) {
+						const html = basket.courses
+							.map(c => {
+								return `
                 <tr>
                   <td>${c.name}</td>
-                  <td>${c.price}</td>
+                  <td>${toCurrency(c.price)}</td>
                   <td>${c.count}</td>
                   <td>
-                    <button class="btn btn-small" id="deleteBtn" data-id="${c.id}">Удалить</button>
+                    <button class="btn btn-small" id="deleteBtn" data-id="${
+											c.id
+										}">Удалить</button>
                   </td>
                 </tr>
-                `}).join('')
-            $basket.querySelector('#basketBody').innerHTML = html
-            $basket.querySelector('#totalPrice').innerHTML = `Итоговая цена: ${toCurrency(basket.price)}`
-          }else{
-            $basket.innerHTML = '<p>Карзина пуста</p>'
-          }
+                `
+							})
+							.join('')
+						$basket.querySelector('#basketBody').innerHTML = html
+						$basket.querySelector(
+							'#totalPrice',
+						).innerHTML = `Итоговая цена: ${toCurrency(basket.price)}`
+					} else {
+						$basket.innerHTML = '<p>Карзина пуста</p>'
+					}
 				})
 		}
 	})
