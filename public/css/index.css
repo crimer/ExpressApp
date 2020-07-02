@@ -32,3 +32,6 @@
   align-items: center;
   justify-content: space-between;
 }
+.deleteCourseForm{
+  margin-top: 20px;
+}

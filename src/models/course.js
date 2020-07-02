@@ -1,78 +1,15 @@
-import { v4 as uuidv4 } from 'uuid'
-import fs from 'fs'
-import path from 'path'
+import { Schema, model } from 'mongoose'
 
-export class Course {
-	constructor(title, price, image) {
-		this.title = title
-		this.price = price
-		this.image = image
-		this.id = uuidv4()
-	}
-	toJson() {
-		return {
-			id: this.id,
-			name: this.title,
-			price: this.price,
-			url: this.image,
-		}
-	}
-	async save() {
-		// Получаем все курсы с json файла
-		const courses = await Course.getAll()
-		// Добавляем новый курс ко всем имеющимся
-		courses.push(this.toJson())
-		// Сохраняем в json
-		return new Promise((resolve, reject) => {
-			fs.writeFile(
-				path.join(__dirname, '..', 'data', 'courses.json'),
-				JSON.stringify(courses, null, 2),
-				err => {
-					if (err) {
-						reject(err)
-					} else {
-						resolve()
-					}
-				},
-			)
-		})
-	}
-	static async update(course) {
-		const courses = await Course.getAll()
-		const index = courses.findIndex(c => c.id === course.id)
-		courses[index] = course
-		// Сохраняем в json
-		return new Promise((resolve, reject) => {
-			fs.writeFile(
-				path.join(__dirname, '..', 'data', 'courses.json'),
-				JSON.stringify(courses, null, 2),
-				err => {
-					if (err) {
-						reject(err)
-					} else {
-						resolve()
-					}
-				},
-			)
-		})
-	}
-	static async getById(id) {
-		const allCourses = await Course.getAll()
-		return allCourses.find(c => c.id === id)
-	}
-	static getAll() {
-		return new Promise((resolve, reject) => {
-			fs.readFile(
-				path.join(__dirname, '..', 'data', 'courses.json'),
-				'utf-8',
-				(err, content) => {
-					if (err) {
-						reject(err)
-					} else {
-						resolve(JSON.parse(content))
-					}
-				},
-			)
-		})
-	}
-}
+const course = new Schema({
+	title: {
+		type: String,
+		required: true,
+	},
+	price: {
+		type: Number,
+		required: true,
+	},
+	image: String,
+})
+
+export const Course = model('Course', course)

@@ -5,13 +5,16 @@ import 'dotenv/config'
 import { coursesRoutes } from './routes/courses.js'
 import { basketRoutes } from './routes/basket.js'
 import exphbs from 'express-handlebars'
+import Handlebars from 'handlebars'
 import path from 'path'
+import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
 
 // Сервер
 export const app = express()
 
 // handlebars настройки
 const hbs = exphbs.create({
+	handlebars: allowInsecurePrototypeAccess(Handlebars),
 	defaultLayout: 'main',
 	extname: 'hbs',
 })

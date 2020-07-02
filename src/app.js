@@ -9,8 +9,9 @@ const start = async () => {
 	try {
 		// Подключаемся к mongodb
 		await monoose.connect(process.env.MONGODB_CONNECT_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
+			useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
 		})
 		// Слушаем порт
 		server.listen(process.env.PORT, () => {

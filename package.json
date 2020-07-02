@@ -8,6 +8,7 @@
 		"dev": "nodemon --exec babel-node src/app.js"
 	},
 	"dependencies": {
+		"@handlebars/allow-prototype-access": "^1.0.3",
 		"body-parser": "^1.19.0",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
