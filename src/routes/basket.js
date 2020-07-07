@@ -38,6 +38,10 @@ basketRoutes.get('/', async (req, res) => {
 })
 
 basketRoutes.delete('/remove/:id', async (req, res) => {
-	const basket = await Basket.remove(req.params.id)
+	await req.user.removeFromBasket(req.params.id)
+	const user = await req.user.populate('basket.items.courseId').execPopulate()
+	const courses = mapBasketItems(user.basket)
+  const basket = { courses, price: toCurrency(computePrice(courses)) }
+  
 	res.status(200).json(basket)
 })

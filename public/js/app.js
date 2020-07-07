@@ -24,12 +24,12 @@ if ($basket) {
 							.map(c => {
 								return `
                 <tr>
-                  <td>${c.name}</td>
-                  <td>${toCurrency(c.price)}</td>
+                  <td>${c.title}</td>
+                  <td>${c.price}</td>
                   <td>${c.count}</td>
                   <td>
                     <button class="btn btn-small" id="deleteBtn" data-id="${
-											c.id
+											c._id
 										}">Удалить</button>
                   </td>
                 </tr>
@@ -39,7 +39,7 @@ if ($basket) {
 						$basket.querySelector('#basketBody').innerHTML = html
 						$basket.querySelector(
 							'#totalPrice',
-						).innerHTML = `Итоговая цена: ${toCurrency(basket.price)}`
+						).innerHTML = `Итоговая цена: ${basket.price}`
 					} else {
 						$basket.innerHTML = '<p>Карзина пуста</p>'
 					}
