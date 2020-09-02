@@ -1,13 +1,14 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
-import 'dotenv/config'
-import { coursesRoutes } from './routes/courses.js'
-import { basketRoutes } from './routes/basket.js'
 import exphbs from 'express-handlebars'
+import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
+import 'dotenv/config'
 import Handlebars from 'handlebars'
 import path from 'path'
-import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
+import { coursesRoutes } from './routes/courses.js'
+import { basketRoutes } from './routes/basket.js'
+import { ordersRoutes } from './routes/orders.js'
 import { User } from './models/user.js'
 
 // Сервер
@@ -31,8 +32,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(async (req, res, next) => {
 	try {
 		const user = await User.findById('5efd7628515e936bb89ea8b1')
-    req.user = user
-    next()
+		req.user = user
+		next()
 	} catch (error) {
 		console.log(error)
 	}
@@ -48,6 +49,7 @@ app.use(morgan(':status :method :url'))
 // Роуты для пользоватлелей под общим url /
 app.use('/', coursesRoutes)
 app.use('/basket', basketRoutes)
+app.use('/orders', ordersRoutes)
 
 // Отлов роута 404 и ошибок
 app.use((req, res, next) => {

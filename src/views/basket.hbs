@@ -1,8 +1,11 @@
 <h1>{{title}}</h1>
 
 <div id="basket">
-  <h5 id="totalPrice">Итоговая цена: {{price}}</h5>
   {{#if courses.length}}
+  <h5 id="totalPrice">Итоговая цена: {{price}}</h5>
+  <form action="/orders" method="POST">
+    <button type="submit" class="btn">Сделать заказ</button>
+  </form>
   <table class="striped">
     <thead>
       <tr>

@@ -28,9 +28,7 @@ if ($basket) {
                   <td>${c.price}</td>
                   <td>${c.count}</td>
                   <td>
-                    <button class="btn btn-small" id="deleteBtn" data-id="${
-											c._id
-										}">Удалить</button>
+                    <button class="btn btn-small" id="deleteBtn" data-id="${c.id}">Удалить</button>
                   </td>
                 </tr>
                 `

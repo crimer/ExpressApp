@@ -11,7 +11,8 @@ const toCurrency = price =>
 
 const mapBasketItems = basket =>
 	basket.items.map(c => ({
-		...c.courseId._doc,
+    ...c.courseId._doc,
+    id: c.courseId.id,
 		count: c.count,
 	}))
 
